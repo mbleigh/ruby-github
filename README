@@ -3,7 +3,9 @@
 Ruby-GitHub is a simple wrapper library for the evolving GitHub API.
 
 = Usage
-
+  
+  require 'ruby-github'
+  
   user = GitHub.user('mbleigh')
   user.name # => "Michael Bleigh"
   user.repositories # => array of repositories
