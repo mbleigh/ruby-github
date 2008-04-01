@@ -14,8 +14,12 @@ Ruby-GitHub is a simple wrapper library for the evolving GitHub API.
   user.repositories.last.commits => array of commits (see below)
 
   commits = GitHub.commits('mbleigh','ruby-github')
+  commits.first.message # => "Moved github.rb to ruby-github.rb for easy remembering, added init.rb so it can also be used as a plugin."
+  commits.first.id # => "1d8c21062e11bb1ecd51ab840aa13d906993f3f7"
   
-  commit = GitHub.commit('mbleigh','ruby-github','')
+  commit = GitHub.commit('mbleigh','ruby-github','1d8c21062e11bb1ecd51ab840aa13d906993f3f7')
+  commit.message # => "Moved github.rb to ruby-github.rb for easy remembering, added init.rb so it can also be used as a plugin."
+  commit.added.collect{|c| c.filename} # => ["init.rb", "lib/ruby-github.rb"]
   
 = Resources
 
