@@ -14,3 +14,8 @@ Ruby-GitHub is a simple wrapper library for the evolving GitHub API.
   commits = GitHub.commits('mbleigh','ruby-github')
   
   commit = GitHub.commit('mbleigh','ruby-github','')
+  
+= Resources
+
+GitHub Project: http://github.com/mbleigh/ruby-github
+E-Mail: michael@intridea.com
