@@ -11,7 +11,6 @@ class GitHub
       url += commit ? "/commit/#{commit}" : "/commits/#{branch}"
     end
     
-    puts url
     GitHub::Hash.new(JSON.parse(open(url).read),user,repo)
   end
   
@@ -56,12 +55,6 @@ class GitHub::Hash < Hash #:nodoc: all
     self["id"] ? self["id"] : super
   end
   
-  def commits
-    return self["commits"] if self["commits"]
-    return GitHub.commits(@user,name) if @user && self["name"] && self["url"]
-    raise NoMethodError, "No such method 'commits'"
-  end
-  
   def [](key)
     key = key.to_s
     super
@@ -77,6 +70,10 @@ class GitHub::Hash < Hash #:nodoc: all
       self[match[1]] = args.first
     elsif keys.include?(method_name.to_s)
       self[method_name]
+    elsif method_name.to_s == "commits" && self["name"] && self["url"]
+      GitHub.commits(@user, name)
+    elsif method_name.to_s == "detailed" && self["id"] && self["message"]
+      GitHub.commit(@user,@repo,self["id"])
     else
       super
     end
