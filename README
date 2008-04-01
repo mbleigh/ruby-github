@@ -1,0 +1,16 @@
+== Ruby-GitHub
+
+Ruby-GitHub is a simple wrapper library for the evolving GitHub API.
+
+= Usage
+
+  user = GitHub.user('mbleigh')
+  user.name # => "Michael Bleigh"
+  user.repositories # => array of repositories
+  user.repositories.last.name # => "ruby-github"
+  user.repositories.last.url # => "http://github.com/mbleigh/ruby-github"
+  user.repositories.last.commits => array of commits (see below)
+
+  commits = GitHub.commits('mbleigh','ruby-github')
+  
+  commit = GitHub.commit('mbleigh','ruby-github','')
