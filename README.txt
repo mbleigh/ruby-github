@@ -54,3 +54,9 @@ latest_commit_filenames = GitHub::API.user('mbleigh').repositories.first.commits
 
 * GitHub Project: http://GitHub::API.com/mbleigh/ruby-github
 * E-Mail: michael@intridea.com
+
+= KNOWN ISSUES/FUTURE DEVELOPMENT:
+
+Right now this library isn't spec'ed out, that's the top priority moving forward. It
+will likely also have to evolve substantially as the GitHub API becomes more mature.
+If you have any questions or requests, don't hesitate to e-mail me!
