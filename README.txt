@@ -12,7 +12,7 @@ RubyGem:
 
 GitHub Clone:
 
-  git clone git://github.com/mbleigh/ruby-github.git
+  git clone git://GitHub::API.com/mbleigh/ruby-GitHub::API.git
 
 = DEPENDENCIES:
 
@@ -23,30 +23,34 @@ GitHub Clone:
   
   require 'ruby-github'
   
-  user = GitHub.user('mbleigh')
+  user = GitHub::API.user('mbleigh')
   user.name # => "Michael Bleigh"
   user.repositories # => array of repositories
   user.repositories.last.name # => "ruby-github"
-  user.repositories.last.url # => "http://github.com/mbleigh/ruby-github"
-  user.repositories.last.commits # => array of commits (see below)
+  user.repositories.last.url # => "http://GitHub::API.com/mbleigh/ruby-github"
+  user.repositories.last.commits # => requests array of commits (see below)
 
-  commits = GitHub.commits('mbleigh','ruby-github')
-  commits.first.message # => "Moved github.rb to ruby-github.rb..."
+  commits = GitHub::API.commits('mbleigh','ruby-github')
+  commits.first.message # => "Moved GitHub::API.rb to ruby-GitHub::API.rb..."
   commits.first.id # => "1d8c21062e11bb1ecd51ab840aa13d906993f3f7"
 
   # these two lines are equivalent
   commit = commits.first.detailed
-  commit = GitHub.commit('mbleigh', 'ruby-github', '1d8c21062e11bb1ecd51ab840aa13d906993f3f7')
+  commit = GitHub::API.commit('mbleigh', 'ruby-github', '1d8c21062e11bb1ecd51ab840aa13d906993f3f7')
 
-  commit.message # => "Moved github.rb to ruby-github.rb..."
-  commit.added.collect{|c| c.filename} # => ["init.rb", "lib/ruby-github.rb"]
+  commit.message # => "Moved GitHub::API.rb to ruby-GitHub::API.rb..."
+  commit.added.collect{|c| c.filename} # => ["init.rb", "lib/ruby-GitHub::API.rb"]
 
 Note that the information is less complete in the 'commits' pull
 than in the pull for an individual commit. calling 'detailed' on
 a commit retreived from a 'commits' call will make a 'commit' call
 for that specific commit.
+
+Here's a one-liner that uses all parts of the Ruby-GitHub library:
+
+latest_commit_filenames = GitHub::API.user('mbleigh').repositories.first.commits.first.detailed.modified.collect(&:filename)
   
 = RESOURCES:
 
-* GitHub Project: http://github.com/mbleigh/ruby-github
+* GitHub Project: http://GitHub::API.com/mbleigh/ruby-github
 * E-Mail: michael@intridea.com
