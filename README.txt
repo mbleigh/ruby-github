@@ -12,7 +12,7 @@ RubyGem:
 
 GitHub Clone:
 
-  git clone git://GitHub::API.com/mbleigh/ruby-GitHub::API.git
+  git clone git://github.com/mbleigh/ruby-github.git
 
 = DEPENDENCIES:
 
