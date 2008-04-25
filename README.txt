@@ -6,9 +6,12 @@ Ruby-GitHub is a simple wrapper library for the evolving GitHub API.
 
 = INSTALLATION:
 
-RubyGem:
+Gem:
 
-  sudo gem install ruby-github
+The gem is hosted on GitHub so you will need to execute the first line if you have not installed any gems from GitHub before.
+
+  gem sources -a http://gems.github.com/  
+  sudo gem install mbleigh-ruby-github
 
 GitHub Clone:
 

@@ -2,4 +2,5 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
+ruby-github.gemspec
 lib/ruby-github.rb
