@@ -11,5 +11,5 @@ Gem::Specification.new do |s|
   s.files = ["History.txt", "Manifest.txt", "README.txt", "Rakefile", "ruby-github.gemspec", "lib/ruby-github.rb"]
   s.rdoc_options = ["--main", "README.txt"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"]
-  s.add_dependency("mash", ["> 0.0.3"])
+  s.add_dependency("mash", [">= 0.0.3"])
 end
