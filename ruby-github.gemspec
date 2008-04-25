@@ -1,8 +1,6 @@
-require './lib/ruby-github'
-
 Gem::Specification.new do |s|
   s.name = "ruby-github"
-  s.version = GitHub::VERSION
+  s.version = "0.0.3"
   s.date = "2008-04-25"
   s.summary = "Simple Ruby library to access the GitHub API."
   s.email = "michael@intridea.com"

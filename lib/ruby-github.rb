@@ -4,7 +4,6 @@ require 'open-uri'
 require 'mash'
 
 module GitHub
-  VERSION = "0.0.3"
   class API
     BASE_URL = "http://github.com/api/v1/json"  
   
