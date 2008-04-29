@@ -55,11 +55,33 @@ latest_commit_filenames = GitHub::API.user('mbleigh').repositories.first.commits
   
 = RESOURCES:
 
-* GitHub Project: http://GitHub::API.com/mbleigh/ruby-github
-* E-Mail: michael@intridea.com
+* GitHub Project: http://github.com/mbleigh/ruby-github
+* Lighthouse: http://mbleigh.lighthouseapp.com/projects/10115-ruby-github
 
 = KNOWN ISSUES/FUTURE DEVELOPMENT:
 
 Right now this library isn't spec'ed out, that's the top priority moving forward. It
 will likely also have to evolve substantially as the GitHub API becomes more mature.
-If you have any questions or requests, don't hesitate to e-mail me!
+If you have any questions or requests, don't hesitate to put them on the Lighthouse!
+
+Copyright (c) 2008 Michael Bleigh (http://mbleigh.com/) 
+and Intridea Inc. (http://intridea.com/), released under the MIT license
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

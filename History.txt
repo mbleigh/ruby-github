@@ -1,3 +1,7 @@
+=== 0.0.4 / 2008-04-26
+
+* Trying to change the version number to fix broken dependency.
+
 === 0.0.3 / 2008-04-25
 
 * Now using GitHub's gem library, ditching Rubyforge.
