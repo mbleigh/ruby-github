@@ -1,3 +1,8 @@
+=== 0.0.5 / 2008-05-26
+
+* Added "repository" command
+* Improved compatibility with GitHub-based Mash
+
 === 0.0.4 / 2008-04-26
 
 * Trying to change the version number to fix broken dependency.

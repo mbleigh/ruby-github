@@ -20,6 +20,10 @@ module GitHub
         GitHub::Commit.new(c.merge(:user => user, :repository => repository))
       }
     end
+    
+    def self.repository(user,repository)
+      GitHub::API.user(user).repositories.select{|r| r.name == repository}.first
+    end
   
     # Fetches a single commit for a repository.
     def self.commit(user,repository,commit)
@@ -41,7 +45,6 @@ module GitHub
     end
     
     def repositories=(repo_array)
-      puts self.inspect
       self["repositories"] = repo_array.collect{|r| ::GitHub::Repository.new(r.merge(:user => login || @user))}
     end
   end

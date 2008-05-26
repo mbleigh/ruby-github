@@ -10,8 +10,7 @@ Gem:
 
 The gem is hosted on GitHub so you will need to execute the first line if you have not installed any gems from GitHub before.
 
-  gem sources -a http://gems.github.com/  
-  sudo gem install mbleigh-ruby-github
+  sudo gem install mbleigh-ruby-github --source=http://gems.github.com
 
 GitHub Clone:
 
@@ -32,6 +31,9 @@ GitHub Clone:
   user.repositories.last.name # => "ruby-github"
   user.repositories.last.url # => "http://GitHub::API.com/mbleigh/ruby-github"
   user.repositories.last.commits # => requests array of commits (see below)
+  
+  repository = GitHub::API.repository('mbleigh','ruby-github')
+  # => <GitHub::Repository name="ruby-github">
 
   commits = GitHub::API.commits('mbleigh','ruby-github')
   commits.first.message # => "Moved GitHub::API.rb to ruby-GitHub::API.rb..."
