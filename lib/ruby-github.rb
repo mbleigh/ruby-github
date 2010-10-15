@@ -15,7 +15,7 @@ module GitHub
   
     # Fetches the commits for a given repository.
     def self.commits(user,repository,branch="master")
-      url = BASE_URL + "/#{user}/#{repository}/commits/#{branch}"
+      url = BASE_URL + "/commits/list/#{user}/#{repository}/#{branch}"
       JSON.parse(open(url).read)["commits"].collect{ |c| 
         GitHub::Commit.new(c.merge(:user => user, :repository => repository))
       }
