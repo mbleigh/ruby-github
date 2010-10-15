@@ -16,9 +16,10 @@ module GitHub
     # Fetches the commits for a given repository.
     def self.commits(user,repository,branch="master")
       url = BASE_URL + "/commits/list/#{user}/#{repository}/#{branch}"
-      JSON.parse(open(url).read)["commits"].collect{ |c| 
-        GitHub::Commit.new(c.merge(:user => user, :repository => repository))
-      }
+      JSON.parse(open(url).read)["commits"].collect do |c| 
+        GitHub::Commit.new(c.merge(:user => user, 
+                                   :repository => repository))
+      end
     end
     
     def self.repository(user,repository)
@@ -29,7 +30,8 @@ module GitHub
     # Fetches a single commit for a repository.
     def self.commit(user,repository,commit_sha)
       url = BASE_URL + "/commits/show/#{user}/#{repository}/#{commit_sha}"
-      GitHub::Commit.new(JSON.parse(open(url).read).merge(:user => user, :repository => repository))
+      GitHub::Commit.new(JSON.parse(open(url).read).merge(:user => user, 
+                                                          :repository => repository))
     end
     
     def self.search(term)
@@ -45,6 +47,27 @@ module GitHub
     
     def self.tree(user, repository, tree_sha)
       url = BASE_URL + "/tree/show/#{user}/#{repository}/#{tree_sha}"
+      JSON.parse(open(url).read)["tree"].collect do |t|
+        t.merge(:user             => user, 
+                :repository       => repository, 
+                :immediate_parent => tree_sha)
+        GitHub::Tree.new(t)
+      end
+    end
+    
+    def self.blobs(user, repository, tree_sha)
+      url = BASE_URL + "/blob/full/#{user}/#{repository}/#{tree_sha}"
+      JSON.parse(open(url).read)["blobs"].collect do |b|
+        b.merge(:user             => user, 
+                :repository       => repository)
+        GitHub::Blob.new(b)
+      end
+    end
+    
+    def self.blob(user, repository, tree_sha, path, meta=false)
+      url = BASE_URL + "/blob/show/#{user}/#{repository}/#{tree_sha}/#{path}"
+      url = url + "?meta=1" if meta
+      GitHub::Blob.new(JSON.parse(open(url).read)["blob"])
     end
   end
   
@@ -52,6 +75,15 @@ module GitHub
     def commits
       ::GitHub::API.commits(user,name)
     end
+  end
+  
+  class Tree < Mash
+    def leaf?
+      self.type.eql?("blob")
+    end
+  end
+  
+  class Blob < Mash    
   end
   
   class User < Mash
