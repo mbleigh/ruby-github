@@ -27,7 +27,14 @@ module GitHub
     def self.repository(user,repository)
       url = BASE_URL + "/repos/show/#{user}/#{repository}"
       GitHub::Repository.new(JSON.parse(open(url).read)["repository"])
-    end    
+    end
+    
+    def self.repositories(user)
+      url = BASE_URL + "/repos/show/#{user}"
+      JSON.parse(open(url).read)["repositories"].collect do |repo| 
+        GitHub::Repository.new(repo)
+      end
+    end
   
     # Fetches the commits for a given repository.
     def self.commits(user,repository,branch="master")
@@ -90,6 +97,10 @@ module GitHub
     def initialize(hash = nil)
       @user = hash["login"] if hash
       super
+    end
+    
+    def repositories
+      ::GitHub::API.repositories(self.login)
     end
   end
   
