@@ -6,33 +6,6 @@ require 'mash'
 module GitHub
   class API
     BASE_URL = "http://github.com/api/v2/json"
-  
-    # Fetches information about the specified user name.
-    def self.user(user)
-      url = BASE_URL + "/user/show/#{user}"
-      GitHub::User.new(JSON.parse(open(url).read)["user"])
-    end
-  
-    # Fetches the commits for a given repository.
-    def self.commits(user,repository,branch="master")
-      url = BASE_URL + "/commits/list/#{user}/#{repository}/#{branch}"
-      JSON.parse(open(url).read)["commits"].collect do |c| 
-        GitHub::Commit.new(c.merge(:user => user, 
-                                   :repository => repository))
-      end
-    end
-    
-    def self.repository(user,repository)
-      url = BASE_URL + "/repos/show/#{user}/#{repository}"
-      GitHub::Repository.new(JSON.parse(open(url).read)["repository"])
-    end
-    
-    # Fetches a single commit for a repository.
-    def self.commit(user,repository,commit_sha)
-      url = BASE_URL + "/commits/show/#{user}/#{repository}/#{commit_sha}"
-      GitHub::Commit.new(JSON.parse(open(url).read).merge(:user => user, 
-                                                          :repository => repository))
-    end
     
     def self.search(term)
       email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -43,6 +16,33 @@ module GitHub
         url = BASE_URL + "/user/search/#{term}"
         GitHub::User.new(JSON.parse(open(url).read)["users"].first)
       end
+    end
+    
+    # Fetches information about the specified user name.
+    def self.user(user)
+      url = BASE_URL + "/user/show/#{user}"
+      GitHub::User.new(JSON.parse(open(url).read)["user"])
+    end
+    
+    def self.repository(user,repository)
+      url = BASE_URL + "/repos/show/#{user}/#{repository}"
+      GitHub::Repository.new(JSON.parse(open(url).read)["repository"])
+    end    
+  
+    # Fetches the commits for a given repository.
+    def self.commits(user,repository,branch="master")
+      url = BASE_URL + "/commits/list/#{user}/#{repository}/#{branch}"
+      JSON.parse(open(url).read)["commits"].collect do |c| 
+        GitHub::Commit.new(c.merge(:user => user, 
+                                   :repository => repository))
+      end
+    end
+    
+    # Fetches a single commit for a repository.
+    def self.commit(user,repository,commit_sha)
+      url = BASE_URL + "/commits/show/#{user}/#{repository}/#{commit_sha}"
+      GitHub::Commit.new(JSON.parse(open(url).read).merge(:user => user, 
+                                                          :repository => repository))
     end
     
     def self.tree(user, repository, tree_sha)
