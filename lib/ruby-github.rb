@@ -24,10 +24,10 @@ module GitHub
     def self.repository(user,repository)
       GitHub::API.user(user).repositories.select{|r| r.name == repository}.first
     end
-  
+    
     # Fetches a single commit for a repository.
-    def self.commit(user,repository,commit)
-      url = BASE_URL + "/#{user}/#{repository}/commit/#{commit}"
+    def self.commit(user,repository,commit_sha)
+      url = BASE_URL + "/commits/show/#{user}/#{repository}/#{commit_sha}"
       GitHub::Commit.new(JSON.parse(open(url).read).merge(:user => user, :repository => repository))
     end
     
