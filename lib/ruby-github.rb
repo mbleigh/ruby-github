@@ -22,7 +22,8 @@ module GitHub
     end
     
     def self.repository(user,repository)
-      GitHub::API.user(user).repositories.select{|r| r.name == repository}.first
+      url = BASE_URL + "/repos/show/#{user}/#{repository}"
+      GitHub::Repository.new(JSON.parse(open(url).read)["repository"])
     end
     
     # Fetches a single commit for a repository.
@@ -57,10 +58,6 @@ module GitHub
     def initialize(hash = nil)
       @user = hash["login"] if hash
       super
-    end
-    
-    def repositories=(repo_array)
-      self["repositories"] = repo_array.collect{|r| ::GitHub::Repository.new(r.merge(:user => login || @user))}
     end
   end
   
