@@ -5,11 +5,11 @@ require 'mash'
 
 module GitHub
   class API
-    BASE_URL = "http://github.com/api/v1/json"  
+    BASE_URL = "http://github.com/api/v2/json"
   
     # Fetches information about the specified user name.
     def self.user(user)
-      url = BASE_URL + "/#{user}"
+      url = BASE_URL + "/user/show/#{user}"
       GitHub::User.new(JSON.parse(open(url).read)["user"])
     end
   
@@ -29,6 +29,21 @@ module GitHub
     def self.commit(user,repository,commit)
       url = BASE_URL + "/#{user}/#{repository}/commit/#{commit}"
       GitHub::Commit.new(JSON.parse(open(url).read).merge(:user => user, :repository => repository))
+    end
+    
+    def self.search(term)
+      email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+      if term.match(email_regex)
+        url = BASE_URL + "/user/email/#{term}"
+        GitHub::User.new(JSON.parse(open(url).read)["user"])
+      else
+        url = BASE_URL + "/user/search/#{term}"
+        GitHub::User.new(JSON.parse(open(url).read)["users"].first)
+      end
+    end
+    
+    def self.tree(user, repository, tree_sha)
+      url = BASE_URL + "/tree/show/#{user}/#{repository}/#{tree_sha}"
     end
   end
   
