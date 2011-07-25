@@ -5,17 +5,17 @@ require 'mash'
 
 module GitHub
   class API
-    BASE_URL = "http://github.com/api/v1/json"  
+    BASE_URL = "http://github.com/api/v2/json"
   
     # Fetches information about the specified user name.
     def self.user(user)
-      url = BASE_URL + "/#{user}"
+      url = BASE_URL + "/user/show/#{user}"
       GitHub::User.new(JSON.parse(open(url).read)["user"])
     end
   
     # Fetches the commits for a given repository.
     def self.commits(user,repository,branch="master")
-      url = BASE_URL + "/#{user}/#{repository}/commits/#{branch}"
+      url = BASE_URL + "/commits/list/#{user}/#{repository}/#{branch}"
       JSON.parse(open(url).read)["commits"].collect{ |c| 
         GitHub::Commit.new(c.merge(:user => user, :repository => repository))
       }
@@ -27,7 +27,7 @@ module GitHub
   
     # Fetches a single commit for a repository.
     def self.commit(user,repository,commit)
-      url = BASE_URL + "/#{user}/#{repository}/commit/#{commit}"
+      url = BASE_URL + "/commits/show/#{user}/#{repository}/#{commit}"
       commit = JSON.parse(open(url).read)["commit"]
       GitHub::Commit.new(commit.merge(:user => user, :repository => repository))
     end
