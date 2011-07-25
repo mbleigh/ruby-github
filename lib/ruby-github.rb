@@ -28,7 +28,8 @@ module GitHub
     # Fetches a single commit for a repository.
     def self.commit(user,repository,commit)
       url = BASE_URL + "/#{user}/#{repository}/commit/#{commit}"
-      GitHub::Commit.new(JSON.parse(open(url).read).merge(:user => user, :repository => repository))
+      commit = JSON.parse(open(url).read)["commit"]
+      GitHub::Commit.new(commit.merge(:user => user, :repository => repository))
     end
   end
   
