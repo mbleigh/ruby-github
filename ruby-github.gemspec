@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--main", "README.txt"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"]
   s.add_dependency("mbleigh-mash", [">= 0.0.5"])
+  s.add_dependency("json")
 end
